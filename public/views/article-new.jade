@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    .container
+        h1 New Article
+        .contact-form
+            form.form-horizontal.col-md-8(role='form', method='POST', action='/article/create')
+                .form-group
+                    label.col-md-2(for='title') Title
+                    .col-md-10
+                        input#title.form-control(type='text', placeholder='Title', name='title')
+                .form-group
+                    label.col-md-2(for='content') Content
+                    .col-md-10
+                        textarea#content.form-control(placeholder='Content', name='content')
+                .form-group
+                    .col-md-12.text-right
+                        button.btn.btn-lg.btn-primary(type='submit') Save

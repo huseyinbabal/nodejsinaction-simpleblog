@@ -1,0 +1,39 @@
+extends layout
+
+block content
+    .row
+        .col-md-8
+            article
+                h1
+                    a(href='/article/#{articleInfo._id}') #{articleInfo.title}
+                .row
+                    .col-sm-12.col-md-12
+                        span.glyphicon.glyphicon-pencil
+                        a(href='/article/#{articleInfo._id}#comments') 10 Comments
+                        span.glyphicon.glyphicon-time
+                        | #{articleInfo.createDate}
+                hr
+                br
+                p.lead
+                    |#{articleInfo.content}
+                hr
+            //
+               Comment form
+            .well
+                h4 Leave a comment
+                form.clearfix(role='form', method='POST', action='/comment/create')
+                    .col-md-12.form-group
+                        input#articleID.form-control(type='hidden', name='articleId', value='#{articleInfo._id}')
+                        label.sr-only(for='comment') Comment
+                        textarea#comment.form-control(placeholder='Comment', name='text')
+                    .col-md-12.form-group.text-right
+                        button.btn.btn-primary(type='submit') Submit
+            hr
+            ul#comments.comments
+                for comment in articleInfo.comments
+                    li.comment
+                        .clearfix
+                            h4.pull-left #{comment.author}
+                            p.pull-right #{comment.createDate}
+                        p
+                            em #{comment.text}

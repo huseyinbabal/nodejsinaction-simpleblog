@@ -1,0 +1,9 @@
+{
+    "db": {
+        "USER": "",
+        "PASS": "",
+        "HOST": "localhost",
+        "PORT": "27017",
+        "DATABASE": "simpleblog"
+    }
+}
