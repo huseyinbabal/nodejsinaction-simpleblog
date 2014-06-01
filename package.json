@@ -1,0 +1,13 @@
+{
+    "author": "Hüseyin BABAL <huseyinbabal88@gmail.com>",
+    "name": "nodejsinaction-simpleblog",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "express": "4.x",
+        "morgan": "~1.0.0",
+        "body-parser": "~1.0.0",
+        "method-override": "~1.0.0",
+        "jade": "latest"
+    }
+}
