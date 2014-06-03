@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    .container
+        h1 Signup
+        .contact-form
+            form.form-horizontal.col-md-8(role='form', method='POST', action='/signup')
+                .form-group
+                    label.col-md-2(for='title') Name
+                    .col-md-10
+                        input#email.form-control(type='text', placeholder='Name', name='name')
+                .form-group
+                    label.col-md-2(for='title') Email
+                    .col-md-10
+                        input#email.form-control(type='text', placeholder='Email', name='email')
+                .form-group
+                    label.col-md-2(for='content') Password
+                    .col-md-10
+                        input#password.form-control(type='password', placeholder='Password', name='password')
+                .form-group
+                    label.col-md-2(for='content') Password Again
+                    .col-md-10
+                        input#password2.form-control(type='password', placeholder='Password Again', name='passwordAgain')
+                .form-group
+                    .col-md-12.text-right
+                        button.btn.btn-lg.btn-primary(type='submit') Signup

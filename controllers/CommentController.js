@@ -3,7 +3,7 @@ module.exports = function(app, mongoose) {
     var Article = mongoose.model("Article");
     var Comment = mongoose.model("Comment");
 
-    app.post("/comment/create", function(req, res) {
+    app.post("/comment/create", ensureAuthenticated, function(req, res) {
         var text = req.body.text;
         var articleID = req.body.articleId;
 
@@ -25,4 +25,9 @@ module.exports = function(app, mongoose) {
             }
         })
     });
+}
+
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) { return next(); }
+    res.redirect('/signin')
 }

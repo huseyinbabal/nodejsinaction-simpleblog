@@ -1,12 +1,14 @@
+var passport = require("passport");
+
 module.exports = function(app, mongoose) {
 
     var Article = mongoose.model("Article");
 
-    app.get("/article/new", function(req, res) {
+    app.get("/article/new", ensureAuthenticated, function(req, res, next) {
         res.render("article-new");
     });
 
-    app.post("/article/create", function(req, res) {
+    app.post("/article/create", ensureAuthenticated, function(req, res) {
         var title = req.body.title;
         var content = req.body.content;
         var articleModel = new Article();
@@ -35,4 +37,9 @@ module.exports = function(app, mongoose) {
             }
         })
     });
+}
+
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) { return next(); }
+    res.redirect('/signin')
 }
