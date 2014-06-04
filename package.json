@@ -18,6 +18,7 @@
         "cookie-parser": "latest",
         "redis": "latest",
         "connect-redis": "latest",
-        "connect-flash": "latest"
+        "connect-flash": "latest",
+        "socket.io": "latest"
     }
 }
