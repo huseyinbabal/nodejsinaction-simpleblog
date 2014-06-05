@@ -5,5 +5,15 @@
         "HOST": "localhost",
         "PORT": "27017",
         "DATABASE": "simpleblog"
+    },
+    "elasticsearch":{
+        "index": "blog",
+        "host": "localhost",
+        "port": "9200",
+        "protocol": "http"
+    },
+    "ironmq": {
+        "project": "yout_project",
+        "token": "your_token"
     }
 }

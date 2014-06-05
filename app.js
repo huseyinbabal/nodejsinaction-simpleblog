@@ -23,7 +23,7 @@ app.use(methodOverride() ); // Simulate DELETE and PUT
 app.use(cookieParser());
 app.use(session({
     secret: 'myHighSecurePassword',
-    store: new sessionStore({url:process.env.REDIS_URL})
+    store: new sessionStore({url:process.env.REDISTOGO_URL})
 }))
 app.use(passport.initialize());
 app.use(passport.session());
