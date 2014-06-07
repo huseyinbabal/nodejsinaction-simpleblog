@@ -6,8 +6,8 @@ var config = require("config");
 
 var iron_mq = require("iron_mq");
 var imq = new iron_mq.Client({
-    token: config.ironmq.token,
-    project_id: config.ironmq.project,
+    token: process.env.IRONMQ_TOKEN,
+    project_id: process.env.IRONMQ_PROJECT,
     queue_name: "article"
 });
 var queue = imq.queue("article");
@@ -15,6 +15,7 @@ var queue = imq.queue("article");
 module.exports = function(app, mongoose) {
 
     var Article = mongoose.model("Article");
+    var Comment = mongoose.model("Comment");
 
     app.get("/article/new", ensureAuthenticated, function(req, res, next) {
         res.render("article-new");
@@ -91,6 +92,39 @@ module.exports = function(app, mongoose) {
             }
         })
     })
+
+    app.get("/rest/articles", function(req, res, next) {
+        Article.find({}, function(err, data) {
+            res.json(data);
+        });
+    });
+
+    app.post("/rest/article/create", function(req, res, next) {
+        var title = req.body.title;
+        var content = req.body.content;
+        var articleModel = new Article();
+        articleModel.title = title;
+        articleModel.content = content;
+        articleModel.author = "anonymous";
+        articleModel.save(function(err, data) {
+            if (err) {
+                res.json({type: false, data: err});
+            } else {
+                res.json({type: true, data: data});
+            }
+        })
+    });
+
+    app.get("/rest/article/show/:id", function(req, res, next) {
+        var id = req.params.id;
+        Article.findOne({"_id": id}, function(err, data) {
+            if (err) {
+                res.json({type: false, data: "Technical Error: " + err});
+            } else {
+                res.json({type: true, data: data});
+            }
+        })
+    });
 }
 
 function ensureAuthenticated(req, res, next) {

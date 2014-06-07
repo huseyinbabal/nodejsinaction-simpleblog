@@ -7,6 +7,11 @@ redis.on("error", function(err) {
 })
 module.exports = function(app) {
 
+    app.all("*", function(req, res, next) {
+        res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:9000');
+        res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+        next();
+    });
     app.get("/", function(req, res) {
         res.render("index");
     });
