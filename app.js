@@ -23,8 +23,10 @@ app.use(methodOverride() ); // Simulate DELETE and PUT
 app.use(cookieParser());
 app.use(session({
     secret: 'myHighSecurePassword',
-    store: new sessionStore({url:process.env.REDISTOGO_URL})
-}))
+    store: new sessionStore({url:process.env.REDISTOGO_URL}),
+    resave: true,
+    saveUninitialized: true
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -34,11 +36,9 @@ app.set('views', __dirname + '/public/views');
 app.set('view engine', 'jade'); // I will use jade
 app.set('view options', { layout: true }); // I will use jade's layout structure(i.e master page)
 
-
-
-require("./models/Article")(mongooseConnection);
 require("./models/User")(mongooseConnection);
 require("./models/Comment")(mongooseConnection);
+require("./models/Article")(mongooseConnection);
 
 require("./lib/passport")();
 

@@ -10,4 +10,4 @@ module.exports = function( mongoose ) {
         }
     });
     mongoose.model( 'Comment', CommentSchema );
-}
+};

@@ -3,7 +3,7 @@ var config = require("config");
 module.exports = function( mongoose ) {
     var Schema   = mongoose.Schema;
 
-    var Comment = require("./Comment");
+    var Comment = mongoose.model("Comment");
 
     var ArticleSchema = new Schema({
         title: String,
